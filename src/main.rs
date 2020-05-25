@@ -1,114 +1,27 @@
-use std::io;
-
 fn main()
 {
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    let n: i32 = input.trim().parse().unwrap();
+    let number_list = vec![34, 50, 25, 100, 65];
 
-    for i in 1..= n * 2 -1
-    {
-        if i <= n
-        {
-            for _j in 0..=i-2
-            {
-                print!(" ");
-            }
-            for j in 1..=n
-            {
-                if i == 1 || i == n * 2 -1
-                {
-                    print!("*");
-                }
-                else
-                {
-                    if j == 1 || j == n
-                    {
-                        print!("*");
-                    }
-                    else
-                    {
-                        print!(" ");
-                    }
-                }
-            }
-            for _j in 0..(n - i) * 2 - 1
-            {
-                print!(" ");
-            }
-            for j in 1..=n
-            {
-                if i == 1 || i == n * 2 -1
-                {
-                    print!("*");
-                }
-                else
-                {
-                    if j == 1
-                    {
-                        if i != n
-                        {
-                            print!("*");
-                        }
-                    }
-                    else if j == n
-                    {
-                        print!("*");
-                    }
-                    else
-                    {
-                        print!(" ");
-                    }
-                }
-            }
+    println!("가장 큰숫자: {}", get_largest_number(&number_list));
+
+    
+    let number_list = vec![2983, 2198, 10929, 293, 192, 192];
+
+    println!("가장 큰숫자: {}", get_largest_number(&number_list));
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+    
+    println!("가장 큰문자: {}", get_largest_number(&char_list));
+}
+
+fn get_largest_number<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for item in list.iter() {
+        if item > largest {
+            largest = item;
         }
-        else
-        {
-            for _j in 0..i - (i - n) * 2 - 1
-            {
-                print!(" ");
-            }
-            for j in 1..=n
-            {
-                if i == 1 || i == n * 2 -1
-                {
-                    print!("*");
-                }
-                else
-                {
-                    if j == 1 || j == n
-                    {
-                        print!("*");
-                    }
-                    else
-                    {
-                        print!(" ");
-                    }
-                }
-            }
-            for _j in 0..(i - n) * 2 - 1
-            {
-                print!(" ");
-            }
-            for j in 1..=n
-            {
-                if i == 1 || i == n * 2 -1
-                {
-                    print!("*");
-                }
-                else
-                {
-                    if j == 1 || j == n
-                    {
-                        print!("*");
-                    }
-                    else
-                    {
-                        print!(" ");
-                    }
-                }
-            }
-        }
-        println!();
     }
+
+    largest
 }
