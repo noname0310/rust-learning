@@ -1,27 +1,37 @@
-fn main()
-{
-    let number_list = vec![34, 50, 25, 100, 65];
+use std::io;
 
-    println!("가장 큰숫자: {}", get_largest_number(&number_list));
+#[inline(always)]
+fn user_inputs<F: std::str::FromStr,R: io::Read>(r: &mut R) -> Vec<F> {
 
-    
-    let number_list = vec![2983, 2198, 10929, 293, 192, 192];
-
-    println!("가장 큰숫자: {}", get_largest_number(&number_list));
-
-    let char_list = vec!['y', 'm', 'a', 'q'];
-    
-    println!("가장 큰문자: {}", get_largest_number(&char_list));
+	let mut text = String::new();
+	r.read_to_string(&mut text).expect("Failed to read");
+	text
+		.split_whitespace()
+		.flat_map(str::parse)
+		.take(2)
+		.collect()
 }
 
-fn get_largest_number<T: PartialOrd>(list: &[T]) -> &T {
-    let mut largest = &list[0];
+fn main() {
+	let inputs: [i32; 2] = {
+		let mut stdin = io::stdin();
+		let inputs = user_inputs::<i32, io::Stdin>(&mut stdin);
+		[inputs[0], inputs[1]]
+	};
 
-    for item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-
-    largest
+	if inputs[0] != inputs[1] {
+		println!("2");
+	}
+	else {
+		let input = inputs[0];
+		let mut i = 2;
+		while i * i <= input {
+			if (input % i) == 0 {
+				println!("{}", i);
+				return;
+			}
+			i += 1;
+		}
+		println!("{}", input);
+	}
 }
