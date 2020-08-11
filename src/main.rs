@@ -21,14 +21,18 @@ fn main() {
 
 	let mut s: Vec<String> = Vec::new();
 	hanoi(input, 1, 3, 2, &mut s);
+	println!("{}", s.len());
+	for elem in s {
+		println!("{}", elem);
+	}
 }
 
 fn hanoi (n: i32, from: i32, target: i32, other: i32, vec: &mut Vec<String>) {
 	if n == 1 {
-		vec.push(String.) println!("{} {}", from, target);
+		vec.push(format!("{} {}", from, target));
 		return;
 	}
 	hanoi(n - 1, from, other, target, vec);
-	println!("{} {}", from, target);
+	vec.push(format!("{} {}", from, target));
 	hanoi(n - 1, other, target, from, vec);
 }
