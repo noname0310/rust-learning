@@ -3,20 +3,11 @@
 	"tasks": [
 		{
 			"type": "cargo",
-			"subcommand": "",
+			"command": "run",
 			"problemMatcher": [
 				"$rustc"
 			],
 			"label": "rust: cargo run",
-			"group": "build"
-		},
-		{
-			"type": "cargo",
-			"subcommand": "run",
-			"problemMatcher": [
-				"$rustc"
-			],
-			"label": "Rust: cargo run - rust-learning",
 			"group": {
 				"kind": "build",
 				"isDefault": true
