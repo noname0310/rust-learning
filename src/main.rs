@@ -19,6 +19,6 @@ where
 
 fn main() {
 	let stdin = std::io::stdin();
-	let inputs: Vec<i32> = user_input::<..., 10>(stdin);
+	let inputs: Vec<i32> = user_input::<_, _, _, 10>(stdin);
 	println!("{:?}", inputs);
 }
