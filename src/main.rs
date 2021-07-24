@@ -1,23 +1,24 @@
-use std::thread;
-use std::sync::mpsc;
-use std::time::Duration;
+use std::io::Read;
+use std::str::FromStr;
+use std::iter::FromIterator;
+
+fn user_input<I, R, T, const N: usize>(mut r: R) -> I
+where
+    I: FromIterator<T>,
+    T: FromStr,
+    R: Read,
+{
+    let mut text = String::new();
+    r.read_to_string(&mut text).unwrap();
+
+    text.split_whitespace()
+        .flat_map(|s|s.parse())
+		.take(N)
+        .collect()
+}
 
 fn main() {
-	let (tx, rx) = mpsc::channel();
-
-	thread::spawn(move || {
-		let vals = vec![
-			String::from("hello"),
-			String::from("world"),
-			String::from("!")
-		];
-		for val in vals {
-			tx.send(val).unwrap();
-			thread::sleep(Duration::from_secs(1));
-		}
-	});
-	
-	for received in rx {
-		println!("Received: {}", received);
-	}
+	let stdin = std::io::stdin();
+	let inputs: Vec<i32> = user_input::<..., 10>(stdin);
+	println!("{:?}", inputs);
 }
