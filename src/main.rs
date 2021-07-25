@@ -1,5 +1,5 @@
 use std::io::Read;
-use std::ops::Deref;
+use std::ops::{Deref, DerefMut};
 use std::str::FromStr;
 use std::iter::FromIterator;
 
@@ -8,7 +8,13 @@ struct MyVec<T>(Vec<T>);
 impl<T> Deref for MyVec<T> {
     type Target = Vec<T>;
     fn deref(&self) -> &Vec<T> {
-        self.ap
+        &self.0
+    }
+}
+
+impl<T> DerefMut for MyVec<T> {
+    fn deref_mut(&mut self) -> &mut Vec<T> {
+        &mut self.0
     }
 }
 
@@ -30,5 +36,7 @@ where
 fn main() {
 	let stdin = std::io::stdin();
 	let inputs: Vec<i32> = user_input::<_, _, _, 10>(stdin);
-	println!("{:?}", inputs);
+    let mut myvec = MyVec(inputs);
+    myvec.push(1);
+	println!("{:?}", myvec);
 }
