@@ -1,6 +1,16 @@
 use std::io::Read;
+use std::ops::Deref;
 use std::str::FromStr;
 use std::iter::FromIterator;
+
+struct MyVec<T>(Vec<T>);
+
+impl<T> Deref for MyVec<T> {
+    type Target = Vec<T>;
+    fn deref(&self) -> &Vec<T> {
+        self.ap
+    }
+}
 
 fn user_input<I, R, T, const N: usize>(mut r: R) -> I
 where
