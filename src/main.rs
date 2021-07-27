@@ -3,6 +3,7 @@ use std::ops::{Deref, DerefMut};
 use std::str::FromStr;
 use std::iter::FromIterator;
 
+#[derive(Debug)]
 struct MyVec<T>(Vec<T>);
 
 impl<T> Deref for MyVec<T> {
